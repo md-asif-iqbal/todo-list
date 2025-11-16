@@ -58,6 +58,8 @@ MONGODB_DB_NAME=todo-app
 npm run dev
 ```
 
+### Login: admin@gmail.com || 12345
+
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
