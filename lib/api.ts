@@ -1,7 +1,8 @@
 import axios from 'axios';
 import type { LoginCredentials, SignupData, Todo, User, AuthResponse, ApiResponse } from '@/types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
+// Use external API if provided, otherwise fallback to local API routes
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://todo-app.pioneeralpha.com';
 
 const api = axios.create({
   baseURL: API_BASE_URL,

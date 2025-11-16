@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -50,11 +51,12 @@ export default function SignupPage() {
     try {
       await authApi.signup(data);
       router.push('/todos');
-    } catch (err: any) {
-     
+    } catch (err: unknown) {
+      // Better error handling - show detailed error message
+      const error = err as { response?: { data?: { message?: string } }; message?: string };
       const errorMessage = 
-        err.response?.data?.message || 
-        err.message || 
+        error.response?.data?.message || 
+        error.message || 
         'Signup failed. Please check your information and try again.';
       setError(errorMessage);
       console.error('Signup error:', err);
@@ -68,44 +70,16 @@ export default function SignupPage() {
       <div className="bg-white rounded-lg shadow-2xl max-w-5xl w-full overflow-hidden">
         <div className="flex flex-col md:flex-row">
           {/* Illustration Section */}
-          <div className="hidden md:flex md:w-1/2 bg-blue-50 p-8 items-center justify-center relative">
+          <div className="hidden md:flex md:w-1/2 bg-blue-50 p-8 items-center justify-center relative overflow-hidden">
             <div className="relative w-full h-full flex items-center justify-center">
-              {/* Decorative shapes */}
-              <div className="absolute top-10 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-20"></div>
-              <div className="absolute bottom-10 right-10 w-32 h-32 bg-blue-300 rounded-full opacity-20"></div>
-              
-              {/* Phone illustration */}
-              <div className="relative z-10 bg-blue-700 rounded-2xl p-8 shadow-2xl">
-                <div className="bg-white rounded-lg p-6 space-y-4 w-64">
-                  <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto flex items-center justify-center">
-                    <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="h-10 bg-gray-100 rounded border-2 border-gray-300 flex items-center px-3">
-                      <span className="text-gray-500 text-sm">•••••</span>
-                    </div>
-                    <button className="w-full bg-blue-600 text-white py-2 rounded font-medium">
-                      Login
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Plant illustration */}
-              <div className="absolute bottom-20 left-8 z-10">
-                <div className="w-12 h-16 bg-green-500 rounded-t-full"></div>
-              </div>
-
-              {/* Person illustration */}
-              <div className="absolute right-8 bottom-8 z-10">
-                <div className="w-24 h-32 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                  </svg>
-                </div>
-              </div>
+              <Image
+                src="/signup.png"
+                alt="Signup illustration"
+                width={600}
+                height={600}
+                className="object-contain w-full h-full"
+                priority
+              />
             </div>
           </div>
 
