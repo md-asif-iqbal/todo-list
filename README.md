@@ -2,6 +2,8 @@
 
 A modern Todo web application built with Next.js, TypeScript, and Tailwind CSS. This application allows users to manage their tasks efficiently with features like creating, updating, deleting, and reordering todos using drag and drop.
 
+### Login: admin@gmail.com || 12345
+
 ## Features
 
 - 🔐 **Authentication**: Sign up and login functionality
@@ -58,7 +60,7 @@ MONGODB_DB_NAME=todo-app
 npm run dev
 ```
 
-### Login: admin@gmail.com || 12345
+
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
